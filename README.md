@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Consty Construction Management System
 
-## Getting Started
+Consty is a modern, full-stack construction management system built with Next.js (React), PHP (REST API), and MySQL. It provides advanced project, employee, material, machine, architect, task, and user management with secure authentication and role-based access control.
 
-First, run the development server:
+## Features
+- Modern Next.js frontend with Tailwind CSS
+- PHP REST API backend (CRUD for all entities)
+- MySQL database
+- Authentication (Sign up, Sign in, Sign out)
+- Role-based access (admin/user)
+- Admin-only user management (view, add, edit, delete users)
+- Protected routes (projects, employees, materials, etc.)
+- Responsive, mobile-friendly UI
+- Advanced modals for add/edit actions
+- 403 error handling for unauthorized access
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+- **Frontend:** Next.js (App Router), React, Tailwind CSS
+- **Backend:** PHP (REST API)
+- **Database:** MySQL
+
+## Folder Structure
+```
+c:\xampp\htdocs\consty
+├── app/                # Next.js app (frontend)
+│   ├── (auth)/         # Auth pages (login, signup)
+│   ├── employees/      # Employees page
+│   ├── materials/      # Materials page
+│   ├── machines/       # Machines page
+│   ├── architects/     # Architects page
+│   ├── tasks/          # Tasks page
+│   ├── users/          # Users management (admin only)
+│   ├── projects/       # Projects page
+│   └── ...
+├── components/         # React components (Navbar, Sidebar, Modals, RequireAuth, etc.)
+├── api/                # PHP API endpoints
+│   ├── db.php
+│   ├── login.php
+│   ├── signup.php
+│   ├── users.php
+│   ├── employees.php
+│   ├── materials.php
+│   ├── machines.php
+│   ├── architects.php
+│   ├── tasks.php
+│   └── ...
+├── tailwind.config.js  # Tailwind CSS config
+├── next.config.ts      # Next.js config
+├── package.json        # Node.js dependencies
+└── README.md           # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 1. Database
+- Create a MySQL database named `consty`.
+- Run the following SQL to create the users table:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+```
+- Create other tables as needed (employees, materials, etc.)
 
-## Learn More
+### 2. Backend (PHP API)
+- Place all PHP files in the `api/` directory.
+- Update `db.php` with your MySQL credentials if needed.
+- Ensure your web server (e.g., XAMPP) is running and can serve the API endpoints (e.g., http://localhost/consty/api/login.php).
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Frontend (Next.js)
+- Install dependencies:
+  ```
+  npm install
+  ```
+- Start the development server:
+  ```
+  npm run dev
+  ```
+- Or build for production:
+  ```
+  npm run build && npm start
+  ```
+- Access the app at [http://localhost:3000/consty](http://localhost:3000/consty) (or your configured basePath).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Authentication & Roles
+- Sign up as a new user (first user is a regular user; set role to 'admin' in the database for admin access).
+- Only admins can access `/users` and manage users.
+- All other routes are protected and require sign in.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 5. Usage Notes
+- Use the sidebar to navigate between entities.
+- Only admins can see and manage users and projects.
+- If you try to access a protected route without signing in, you will be redirected to `/login`.
+- If you try to access an admin-only route as a non-admin, you will see a 403 Forbidden error.
 
-## Deploy on Vercel
+## Contribution
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+[MIT](LICENSE)
