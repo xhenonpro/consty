@@ -1,0 +1,61 @@
+-- USERS TABLE
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(100) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) DEFAULT 'user',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- PROJECTS TABLE
+CREATE TABLE projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    status VARCHAR(50) DEFAULT 'ongoing',
+    start_date DATE,
+    end_date DATE
+);
+
+-- MATERIALS TABLE
+CREATE TABLE materials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+);
+
+-- MACHINES TABLE
+CREATE TABLE machines (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL
+);
+
+-- TASKS TABLE
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    project_id INT,
+    deadline DATE,
+    status VARCHAR(50) DEFAULT 'pending'
+);
+
+-- ARCHITECTS TABLE
+CREATE TABLE architects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    project_id INT,
+    email VARCHAR(100) NOT NULL,
+    phone VARCHAR(20)
+);
+
+-- EMPLOYEES TABLE
+CREATE TABLE employees (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    salary DECIMAL(10,2) NOT NULL,
+    project_id INT,
+    email VARCHAR(100),
+    phone VARCHAR(20)
+);
