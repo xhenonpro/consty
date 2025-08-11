@@ -1,6 +1,6 @@
 # Consty Construction Management System
 
-Consty is a modern, full-stack construction management system built with Next.js (React), PHP (REST API), and MySQL. It provides advanced project, employee, material, machine, architect, task, and user management with secure authentication and role-based access control.
+Constya is a modern, full-stack construction management system built with Next.js (React), PHP (REST API), and MySQL. It provides advanced project, employee, material, machine, architect, task, and user management with secure authentication and role-based access control.
 
 ## Features
 - Modern Next.js frontend with Tailwind CSS
